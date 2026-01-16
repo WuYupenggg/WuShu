@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>У Юйпэн | Мастер Кунг-фу и Тайцзицюань</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+        }
+        .chinese-font { font-family: 'Noto Sans SC', sans-serif; }
+        .accent-gold { color: #d4af37; }
+        .bg-gold { background-color: #d4af37; }
+        .border-gold { border-color: #d4af37; }
+        
+        .hero-gradient {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-gold/20 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-2xl font-bold accent-gold tracking-widest">УЩУ</div>
+            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-wider">
+                <a href="#about" class="hover:text-gold transition">О мастере</a>
+                <a href="#wingchun" class="hover:text-gold transition">Вин-чун</a>
+                <a href="#taichi" class="hover:text-gold transition">Тайцзицюань</a>
+                <a href="#pricing" class="hover:text-gold transition">Обучение</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="h-screen flex items-center justify-center hero-gradient text-center px-4">
+        <div>
+            <h2 class="text-gold text-xl tracking-widest mb-4 uppercase">Традиционные боевые искусства</h2>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">У ЮЙПЭН <span class="block text-2xl mt-4 font-light text-gray-400">Мастер Вин-чун и Тайцзи</span></h1>
+            <div class="w-24 h-1 bg-gold mx-auto mb-8"></div>
+            <p class="max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed">
+                Сочетание интеллектуальной мощи Университета ИТМО и 10-летнего опыта традиционного кунг-фу. Путь от самообороны до внутренней гармонии.
+            </p>
+            <a href="#pricing" class="inline-block mt-10 px-8 py-3 bg-gold text-black font-bold uppercase tracking-widest hover:bg-yellow-600 transition">Начать обучение</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h3 class="text-3xl font-bold mb-6 border-l-4 border-gold pl-4">ИНТЕЛЛЕКТ И СИЛА</h3>
+                <p class="mb-4 text-gray-400 leading-relaxed">
+                    Я, <strong>У Юйпэн</strong> (2000 г.р.), представляю новое поколение мастеров боевых искусств. Окончив магистратуру в <strong>Университете ИТМО</strong>, я применяю аналитический подход к обучению древним техникам.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">10 лет Вин-чун</h4>
+                            <p class="text-sm text-gray-500">Глубокое изучение системы прикладного боя.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Тайцзи Чэньши</h4>
+                            <p class="text-sm text-gray-500">Обучение в Чэньцзягоу — колыбели Тайцзи.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-zinc-900 p-8 border border-white/10 rounded-lg text-center">
+                <span class="text-6xl font-bold text-gold">10+</span>
+                <p class="text-xl mt-2 uppercase tracking-widest">Лет практики</p>
+                <div class="mt-6 grid grid-cols-2 gap-4 text-sm text-gray-400">
+                    <div class="p-4 border border-white/5">Самооборона</div>
+                    <div class="p-4 border border-white/5">Философия</div>
+                    <div class="p-4 border border-white/5">Спорт</div>
+                    <div class="p-4 border border-white/5">Здоровье</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="wingchun" class="py-20 bg-zinc-950">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-4xl font-bold mb-4 italic accent-gold">ВИН-ЧУН (咏春拳)</h3>
+            <p class="text-gray-500 mb-12">Искусство быстрого и эффективного боя</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 bg-zinc-900 rounded-xl card-hover">
+                    <i class="fas fa-fist-raised text-4xl mb-6 text-gold"></i>
+                    <h4 class="text-xl font-bold mb-4">Базовые формы</h4>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li>Сю Ним Тао (Малая идея)</li>
+                        <li>Чам Кью (Поиск рук)</li>
+                        <li>Бил Джи (Пронзающие пальцы)</li>
+                    </ul>
+                </div>
+                <div class="p-8 bg-zinc-900 rounded-xl card-hover">
+                    <i class="fas fa-khanda text-4xl mb-6 text-gold"></i>
+                    <h4 class="text-xl font-bold mb-4">Оружие и Манекены</h4>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li>Мужэньчжуан (Деревянный манекен)</li>
+                        <li>Ба Чжань Дао (Мечи-бабочки)</li>
+                        <li>Лю Дянь Бань Гунь (Шест)</li>
+                    </ul>
+                </div>
+                <div class="p-8 bg-zinc-900 rounded-xl card-hover border-2 border-gold/30">
+                    <i class="fas fa-user-shield text-4xl mb-6 text-gold"></i>
+                    <h4 class="text-xl font-bold mb-4">Прикладной бой</h4>
+                    <ul class="text-gray-400 text-sm space-y-2 font-medium">
+                        <li class="text-white">Женская самооборона</li>
+                        <li class="text-white">Быстрое обезвреживание</li>
+                        <li class="text-white">Реальное применение</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="taichi" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="taichi.png" alt="Tai Chi" class="rounded-lg grayscale hover:grayscale-0 transition duration-500 shadow-2xl">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-4xl font-bold mb-6">ТАЙЦЗИЦЮАНЬ СЕМЬИ ЧЭНЬ</h3>
+                    <p class="text-gray-400 mb-6 italic text-lg text-gold">"Сила в мягкости, энергия в покое"</p>
+                    <p class="mb-6 text-gray-300">Прямое наследование из деревни Чэньцзягоу. Идеально подходит как для укрепления здоровья, так и для участия в соревнованиях.</p>
+                    <div class="space-y-3">
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>13 Форм (Оздоровление)</span>
+                            <span class="text-gold italic">Начинающий</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>18 Форм (Баланс)</span>
+                            <span class="text-gold italic">Средний</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/10 pb-2">
+                            <span>34 Формы (Конкурсные стандарты)</span>
+                            <span class="text-gold italic">Продвинутый</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-20 bg-gold text-black">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-4xl font-bold mb-8 uppercase tracking-tighter">Обучение и расписание</h3>
+            <div class="max-w-4xl mx-auto bg-black text-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
+                <div class="p-12 md:w-1/2 flex flex-col justify-center">
+                    <div class="text-sm uppercase tracking-widest text-gray-400 mb-2">Стоимость</div>
+                    <div class="text-5xl font-bold mb-4">20,000 <span class="text-xl font-light">₽/мес</span></div>
+                    <p class="text-gray-400">Интенсивные тренировки в малых группах для достижения максимального результата.</p>
+                </div>
+                <div class="p-12 md:w-1/2 bg-zinc-900 flex flex-col justify-center border-l border-white/5">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <i class="far fa-clock text-gold text-2xl"></i>
+                        <div class="text-left">
+                            <h5 class="font-bold uppercase text-gold italic">Суббота и Воскресенье</h5>
+                            <p class="text-2xl">09:00 — 12:00</p>
+                        </div>
+                    </div>
+                    <p class="text-left text-sm text-gray-500 italic">* Место проведения уточняется при записи.</p>
+                </div>
+            </div>
+            <button class="mt-12 px-10 py-4 bg-black text-white font-bold rounded-full hover:scale-105 transition transform">ЗАПИСАТЬСЯ НА ПРОБНОЕ ЗАНЯТИЕ</button>
+        </div>
+    </section>
+
+    <footer class="py-10 border-t border-white/10 text-center text-gray-500 text-sm">
+        <div class="mb-4">
+            <a href="#" class="mx-2 hover:text-gold"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="mx-2 hover:text-gold"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="mx-2 hover:text-gold"><i class="fab fa-vk"></i></a>
+        </div>
+        <p>&copy; 2026 У Юйпэн. ИТМО Магистр. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>
+
