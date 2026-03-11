@@ -26,18 +26,38 @@
             background-position: center;
         }
         
+        /* 语言切换按钮样式 - 还原图片效果 */
+        .lang-btn {
+            position: relative;
+            color: #888;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding-bottom: 2px;
+        }
+        
+        .lang-active {
+            color: #d4af37 !important;
+        }
+
+        .lang-active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #d4af37;
+        }
+
         .card-hover:hover {
             transform: translateY(-5px);
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
         }
-
-        .lang-active { color: #d4af37; font-weight: bold; border-bottom: 2px solid #d4af37; }
         
         #wechat-modal { display: none; }
         #wechat-modal.active { display: flex; }
 
-        /* Анимация мобильного меню */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
             transform: translateX(100%);
@@ -49,47 +69,44 @@
 </head>
 <body class="overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-gold/20 py-4">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="text-2xl font-bold accent-gold tracking-widest uppercase">Ущу</div>
+    <nav class="fixed w-full z-50 bg-black/95 backdrop-blur-md border-b border-gold/20 py-4">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+            <div class="text-xl md:text-2xl font-bold accent-gold tracking-widest uppercase">Ущу</div>
             
             <div class="hidden lg:flex space-x-8 text-sm uppercase tracking-wider items-center">
                 <a href="#about" data-key="nav-about" class="hover:text-gold transition">О мастере</a>
                 <a href="#wingchun" data-key="nav-wingchun" class="hover:text-gold transition">Вин-чун</a>
                 <a href="#taichi" data-key="nav-taichi" class="hover:text-gold transition">Тайцзицюань</a>
                 <a href="#pricing" data-key="nav-pricing" class="hover:text-gold transition">Обучение</a>
-                
-                <div class="flex space-x-3 border-l border-gold/30 pl-6 ml-4">
-                    <button onclick="switchLang('ru')" class="lang-btn lang-ru lang-active hover:text-gold transition">RU</button>
-                    <button onclick="switchLang('en')" class="lang-btn lang-en hover:text-gold transition">EN</button>
-                    <button onclick="switchLang('zh')" class="lang-btn lang-zh hover:text-gold transition chinese-font">中</button>
-                </div>
             </div>
 
-            <button onclick="toggleMobileMenu()" class="lg:hidden text-gold text-2xl focus:outline-none">
-                <i class="fas fa-bars"></i>
-            </button>
+            <div class="flex items-center">
+                <div class="flex space-x-4 items-center mr-4 lg:ml-4 lg:pl-6 lg:border-l lg:border-gold/30">
+                    <button onclick="switchLang('ru')" class="lang-btn lang-ru lang-active text-xs md:text-sm uppercase">RU</button>
+                    <button onclick="switchLang('en')" class="lang-btn lang-en text-xs md:text-sm uppercase">EN</button>
+                    <button onclick="switchLang('zh')" class="lang-btn lang-zh text-xs md:text-sm chinese-font">中</button>
+                </div>
+
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-gold text-xl focus:outline-none ml-2">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
     <div id="mobile-menu" class="fixed inset-0 z-[60] bg-zinc-950 flex flex-col p-8 lg:hidden">
         <div class="flex justify-between items-center mb-12">
-            <div class="text-2xl font-bold accent-gold">МЕНЮ</div>
+            <div class="text-2xl font-bold accent-gold uppercase tracking-widest">Меню</div>
             <button onclick="toggleMobileMenu()" class="text-gold text-3xl">&times;</button>
         </div>
-        <div class="flex flex-col space-y-6 text-xl uppercase tracking-widest">
+        <div class="flex flex-col space-y-8 text-xl uppercase tracking-[0.2em]">
             <a href="#about" onclick="toggleMobileMenu()" data-key="nav-about">О мастере</a>
             <a href="#wingchun" onclick="toggleMobileMenu()" data-key="nav-wingchun">Вин-чун</a>
             <a href="#taichi" onclick="toggleMobileMenu()" data-key="nav-taichi">Тайцзицюань</a>
             <a href="#pricing" onclick="toggleMobileMenu()" data-key="nav-pricing">Обучение</a>
         </div>
-        <div class="mt-auto border-t border-gold/20 pt-8">
-            <p class="text-xs text-gray-500 mb-4 uppercase">Выберите язык / Select Language</p>
-            <div class="flex space-x-6 text-lg">
-                <button onclick="switchLang('ru')" class="lang-btn lang-ru">RU</button>
-                <button onclick="switchLang('en')" class="lang-btn lang-en">EN</button>
-                <button onclick="switchLang('zh')" class="lang-btn lang-zh chinese-font">中文</button>
-            </div>
+        <div class="mt-auto border-t border-gold/20 pt-8 text-gray-500 text-xs">
+            <p>WU YUPENG KUNGFU © 2026</p>
         </div>
     </div>
 
@@ -102,7 +119,7 @@
             </h1>
             <div class="w-16 md:w-24 h-1 bg-gold mx-auto mb-8"></div>
             <p data-key="hero-desc" class="max-w-2xl mx-auto text-base md:text-lg text-gray-300 leading-relaxed">
-                Сочетание интеллектуальной мощи Университета ИТМО и 10-летнего опыта традиционного кунг-фу.
+                Сочетание интеллектуальной мощи Университета ИТМО и 10-летнего опыта традиционного кунг-功夫.
             </p>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10">
                 <a href="#pricing" data-key="hero-btn" class="w-full sm:w-auto px-8 py-4 bg-gold text-black font-bold uppercase tracking-widest hover:bg-yellow-600 transition">Начать обучение</a>
@@ -141,34 +158,6 @@
                     <div data-key="tag2" class="p-3 border border-white/5 bg-black/20">Философия</div>
                     <div data-key="tag3" class="p-3 border border-white/5 bg-black/20">Спорт</div>
                     <div data-key="tag4" class="p-3 border border-white/5 bg-black/20">Здоровье</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="wingchun" class="py-20 bg-zinc-950 px-6">
-        <div class="container mx-auto text-center">
-            <h3 data-key="wc-h3" class="text-3xl md:text-4xl font-bold mb-4 italic accent-gold uppercase">ВИН-ЧУН (咏春拳)</h3>
-            <p data-key="wc-p" class="text-gray-500 mb-12">Искусство быстрого и эффективного боя</p>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="p-8 bg-zinc-900 rounded-xl card-hover border border-white/5">
-                    <i class="fas fa-fist-raised text-3xl mb-6 text-gold"></i>
-                    <h4 data-key="wc-f1-t" class="text-lg font-bold mb-4 uppercase">Формы</h4>
-                    <ul class="text-gray-400 text-sm space-y-1">
-                        <li>Siu Nim Tao</li><li>Chum Kiu</li><li>Biu Jee</li>
-                    </ul>
-                </div>
-                <div class="p-8 bg-zinc-900 rounded-xl card-hover border border-white/5">
-                    <i class="fas fa-khanda text-3xl mb-6 text-gold"></i>
-                    <h4 data-key="wc-f2-t" class="text-lg font-bold mb-4 uppercase">Оружие</h4>
-                    <ul class="text-gray-400 text-sm space-y-1">
-                        <li>Wooden Dummy</li><li>Butterfly Swords</li>
-                    </ul>
-                </div>
-                <div class="p-8 bg-zinc-900 rounded-xl card-hover border border-gold/30">
-                    <i class="fas fa-user-shield text-3xl mb-6 text-gold"></i>
-                    <h4 data-key="wc-f3-t" class="text-lg font-bold mb-4 uppercase">Прикладной бой</h4>
-                    <p data-key="wc-f3-d" class="text-gray-400 text-xs">Реальное применение и женская самооборона.</p>
                 </div>
             </div>
         </div>
@@ -224,7 +213,7 @@
     <div id="wechat-modal" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center p-6" onclick="toggleWechat()">
         <div class="bg-white p-4 rounded-2xl max-w-xs w-full relative" onclick="event.stopPropagation()">
             <button class="absolute -top-12 right-0 text-white text-4xl" onclick="toggleWechat()">&times;</button>
-            <img src="wechat.jpg" alt="QR" class="w-full h-auto rounded-lg shadow-xl border border-gray-100">
+            <img src="wechat.jpg" alt="WeChat QR" class="w-full h-auto rounded-lg">
             <p class="text-black text-center mt-4 font-bold text-xs uppercase">ID: WuYuPeng_Kungfu</p>
         </div>
     </div>
