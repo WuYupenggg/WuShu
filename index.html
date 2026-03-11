@@ -27,223 +27,245 @@
         }
         
         .card-hover:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
         }
 
         .lang-active { color: #d4af37; font-weight: bold; border-bottom: 2px solid #d4af37; }
         
-        /* 微信二维码弹窗样式 */
         #wechat-modal { display: none; }
         #wechat-modal.active { display: flex; }
+
+        /* Анимация мобильного меню */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.active {
+            transform: translateX(0);
+        }
     </style>
 </head>
-<body>
+<body class="overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-gold/20 py-4">
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-gold/20 py-4">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="text-2xl font-bold accent-gold tracking-widest">УЩУ</div>
-            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-wider items-center">
+            <div class="text-2xl font-bold accent-gold tracking-widest uppercase">Ущу</div>
+            
+            <div class="hidden lg:flex space-x-8 text-sm uppercase tracking-wider items-center">
                 <a href="#about" data-key="nav-about" class="hover:text-gold transition">О мастере</a>
                 <a href="#wingchun" data-key="nav-wingchun" class="hover:text-gold transition">Вин-чун</a>
                 <a href="#taichi" data-key="nav-taichi" class="hover:text-gold transition">Тайцзицюань</a>
                 <a href="#pricing" data-key="nav-pricing" class="hover:text-gold transition">Обучение</a>
                 
                 <div class="flex space-x-3 border-l border-gold/30 pl-6 ml-4">
-                    <button onclick="switchLang('ru')" id="lang-ru" class="lang-active hover:text-gold transition">RU</button>
-                    <button onclick="switchLang('en')" id="lang-en" class="hover:text-gold transition">EN</button>
-                    <button onclick="switchLang('zh')" id="lang-zh" class="hover:text-gold transition chinese-font">中</button>
+                    <button onclick="switchLang('ru')" class="lang-btn lang-ru lang-active hover:text-gold transition">RU</button>
+                    <button onclick="switchLang('en')" class="lang-btn lang-en hover:text-gold transition">EN</button>
+                    <button onclick="switchLang('zh')" class="lang-btn lang-zh hover:text-gold transition chinese-font">中</button>
                 </div>
             </div>
+
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-gold text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <section class="h-screen flex items-center justify-center hero-gradient text-center px-4">
-        <div>
-            <h2 data-key="hero-sub" class="text-gold text-xl tracking-widest mb-4 uppercase">Традиционные боевые искусства</h2>
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-zinc-950 flex flex-col p-8 lg:hidden">
+        <div class="flex justify-between items-center mb-12">
+            <div class="text-2xl font-bold accent-gold">МЕНЮ</div>
+            <button onclick="toggleMobileMenu()" class="text-gold text-3xl">&times;</button>
+        </div>
+        <div class="flex flex-col space-y-6 text-xl uppercase tracking-widest">
+            <a href="#about" onclick="toggleMobileMenu()" data-key="nav-about">О мастере</a>
+            <a href="#wingchun" onclick="toggleMobileMenu()" data-key="nav-wingchun">Вин-чун</a>
+            <a href="#taichi" onclick="toggleMobileMenu()" data-key="nav-taichi">Тайцзицюань</a>
+            <a href="#pricing" onclick="toggleMobileMenu()" data-key="nav-pricing">Обучение</a>
+        </div>
+        <div class="mt-auto border-t border-gold/20 pt-8">
+            <p class="text-xs text-gray-500 mb-4 uppercase">Выберите язык / Select Language</p>
+            <div class="flex space-x-6 text-lg">
+                <button onclick="switchLang('ru')" class="lang-btn lang-ru">RU</button>
+                <button onclick="switchLang('en')" class="lang-btn lang-en">EN</button>
+                <button onclick="switchLang('zh')" class="lang-btn lang-zh chinese-font">中文</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="min-h-screen flex items-center justify-center hero-gradient text-center px-6">
+        <div class="pt-20">
+            <h2 data-key="hero-sub" class="text-gold text-sm md:text-xl tracking-[0.3em] mb-4 uppercase">Традиционные боевые искусства</h2>
+            <h1 class="text-4xl md:text-7xl font-bold mb-6 leading-tight">
                 <span data-key="hero-name">У ЮЙПЭН</span> 
-                <span data-key="hero-title" class="block text-2xl mt-4 font-light text-gray-400">Мастер Вин-чун и Тайцзи</span>
+                <span data-key="hero-title" class="block text-xl md:text-2xl mt-4 font-light text-gray-400 uppercase tracking-widest">Мастер Вин-чун и Тайцзи</span>
             </h1>
-            <div class="w-24 h-1 bg-gold mx-auto mb-8"></div>
-            <p data-key="hero-desc" class="max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed">
-                Сочетание интеллектуальной мощи Университета ИТМО и 10-летнего опыта традиционного кунг-фу. Путь от самообороны до внутренней гармонии.
+            <div class="w-16 md:w-24 h-1 bg-gold mx-auto mb-8"></div>
+            <p data-key="hero-desc" class="max-w-2xl mx-auto text-base md:text-lg text-gray-300 leading-relaxed">
+                Сочетание интеллектуальной мощи Университета ИТМО и 10-летнего опыта традиционного кунг-фу.
             </p>
-            <div class="flex flex-wrap justify-center gap-4 mt-10">
-                <a href="#pricing" data-key="hero-btn" class="px-8 py-3 bg-gold text-black font-bold uppercase tracking-widest hover:bg-yellow-600 transition">Начать обучение</a>
-                <a href="https://t.me/WuYuPeng" target="_blank" class="px-8 py-3 border border-gold text-gold font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition">Telegram</a>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10">
+                <a href="#pricing" data-key="hero-btn" class="w-full sm:w-auto px-8 py-4 bg-gold text-black font-bold uppercase tracking-widest hover:bg-yellow-600 transition">Начать обучение</a>
+                <a href="https://t.me/WuYuPeng" target="_blank" class="w-full sm:w-auto px-8 py-4 border border-gold text-gold font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition">Telegram</a>
             </div>
         </div>
     </section>
 
     <section id="about" class="py-20 container mx-auto px-6">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h3 data-key="about-h3" class="text-3xl font-bold mb-6 border-l-4 border-gold pl-4 uppercase">ИНТЕЛЛЕКТ И СИЛА</h3>
-                <p data-key="about-p" class="mb-4 text-gray-400 leading-relaxed">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="order-2 lg:order-1">
+                <h3 data-key="about-h3" class="text-2xl md:text-3xl font-bold mb-6 border-l-4 border-gold pl-4 uppercase">ИНТЕЛЛЕКТ И СИЛА</h3>
+                <p data-key="about-p" class="mb-6 text-gray-400 leading-relaxed text-sm md:text-base">
                     Я, <strong>У Юйпэн</strong> (2000 г.р.), представляю новое поколение мастеров боевых искусств. Окончив магистратуру в <strong>Университете ИТМО</strong>, я применяю аналитический подход к обучению древним техникам.
                 </p>
-                <div class="space-y-4">
+                <div class="grid sm:grid-cols-2 gap-6">
                     <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
+                        <div class="w-10 h-10 shrink-0 rounded-full border border-gold flex items-center justify-center text-gold"><i class="fas fa-shield-alt"></i></div>
                         <div>
-                            <h4 data-key="about-feat1-t" class="font-bold">10 лет Вин-чун</h4>
-                            <p data-key="about-feat1-d" class="text-sm text-gray-500">Глубокое изучение системы прикладного боя.</p>
+                            <h4 data-key="about-feat1-t" class="font-bold text-sm">10 лет Вин-чун</h4>
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 rounded-full border border-gold flex items-center justify-center text-gold">
-                            <i class="fas fa-leaf"></i>
-                        </div>
+                        <div class="w-10 h-10 shrink-0 rounded-full border border-gold flex items-center justify-center text-gold"><i class="fas fa-leaf"></i></div>
                         <div>
-                            <h4 data-key="about-feat2-t" class="font-bold">Тайцзи Чэньши</h4>
-                            <p data-key="about-feat2-d" class="text-sm text-gray-500">Обучение в Чэньцзягоу — колыбели Тайцзи.</p>
+                            <h4 data-key="about-feat2-t" class="font-bold text-sm">Тайцзи Чэньши</h4>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bg-zinc-900 p-8 border border-white/10 rounded-lg text-center">
+            <div class="order-1 lg:order-2 bg-zinc-900 p-8 border border-white/10 rounded-2xl text-center">
                 <span class="text-6xl font-bold text-gold">10</span>
                 <p data-key="about-stat" class="text-xl mt-2 uppercase tracking-widest">Лет практики</p>
-                <div class="mt-6 grid grid-cols-2 gap-4 text-sm text-gray-400">
-                    <div data-key="tag1" class="p-4 border border-white/5">Самооборона</div>
-                    <div data-key="tag2" class="p-4 border border-white/5">Философия</div>
-                    <div data-key="tag3" class="p-4 border border-white/5">Спорт</div>
-                    <div data-key="tag4" class="p-4 border border-white/5">Здоровье</div>
+                <div class="mt-6 grid grid-cols-2 gap-2 text-[10px] md:text-xs uppercase tracking-tighter">
+                    <div data-key="tag1" class="p-3 border border-white/5 bg-black/20">Самооборона</div>
+                    <div data-key="tag2" class="p-3 border border-white/5 bg-black/20">Философия</div>
+                    <div data-key="tag3" class="p-3 border border-white/5 bg-black/20">Спорт</div>
+                    <div data-key="tag4" class="p-3 border border-white/5 bg-black/20">Здоровье</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="wingchun" class="py-20 bg-zinc-950">
-        <div class="container mx-auto px-6 text-center">
-            <h3 data-key="wc-h3" class="text-4xl font-bold mb-4 italic accent-gold uppercase">ВИН-ЧУН (咏春拳)</h3>
+    <section id="wingchun" class="py-20 bg-zinc-950 px-6">
+        <div class="container mx-auto text-center">
+            <h3 data-key="wc-h3" class="text-3xl md:text-4xl font-bold mb-4 italic accent-gold uppercase">ВИН-ЧУН (咏春拳)</h3>
             <p data-key="wc-p" class="text-gray-500 mb-12">Искусство быстрого и эффективного боя</p>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-8 bg-zinc-900 rounded-xl card-hover">
-                    <i class="fas fa-fist-raised text-4xl mb-6 text-gold"></i>
-                    <h4 data-key="wc-f1-t" class="text-xl font-bold mb-4">Базовые формы</h4>
-                    <ul class="text-gray-400 text-sm space-y-2">
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="p-8 bg-zinc-900 rounded-xl card-hover border border-white/5">
+                    <i class="fas fa-fist-raised text-3xl mb-6 text-gold"></i>
+                    <h4 data-key="wc-f1-t" class="text-lg font-bold mb-4 uppercase">Формы</h4>
+                    <ul class="text-gray-400 text-sm space-y-1">
                         <li>Siu Nim Tao</li><li>Chum Kiu</li><li>Biu Jee</li>
                     </ul>
                 </div>
-                <div class="p-8 bg-zinc-900 rounded-xl card-hover">
-                    <i class="fas fa-khanda text-4xl mb-6 text-gold"></i>
-                    <h4 data-key="wc-f2-t" class="text-xl font-bold mb-4">Оружие</h4>
-                    <ul class="text-gray-400 text-sm space-y-2">
-                        <li>Wooden Dummy</li><li>Butterfly Swords</li><li>Long Pole</li>
+                <div class="p-8 bg-zinc-900 rounded-xl card-hover border border-white/5">
+                    <i class="fas fa-khanda text-3xl mb-6 text-gold"></i>
+                    <h4 data-key="wc-f2-t" class="text-lg font-bold mb-4 uppercase">Оружие</h4>
+                    <ul class="text-gray-400 text-sm space-y-1">
+                        <li>Wooden Dummy</li><li>Butterfly Swords</li>
                     </ul>
                 </div>
                 <div class="p-8 bg-zinc-900 rounded-xl card-hover border border-gold/30">
-                    <i class="fas fa-user-shield text-4xl mb-6 text-gold"></i>
-                    <h4 data-key="wc-f3-t" class="text-xl font-bold mb-4">Прикладной бой</h4>
-                    <p data-key="wc-f3-d" class="text-gray-400 text-sm">Реальное применение и женская самооборона.</p>
+                    <i class="fas fa-user-shield text-3xl mb-6 text-gold"></i>
+                    <h4 data-key="wc-f3-t" class="text-lg font-bold mb-4 uppercase">Прикладной бой</h4>
+                    <p data-key="wc-f3-d" class="text-gray-400 text-xs">Реальное применение и женская самооборона.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="taichi" class="py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h3 data-key="tc-h3" class="text-4xl font-bold mb-6 uppercase">ТАЙЦЗИЦЮАНЬ СЕМЬИ ЧЭНЬ</h3>
-            <p data-key="tc-p" class="text-gold italic mb-10 text-xl italic underline">18 форм, 34 формы, 56 форм</p>
-            <div class="max-w-2xl mx-auto mb-10 text-gray-400">
-                <p data-key="tc-desc">Оздоровительные методики и профессиональная подготовка к соревнованиям по Тайцзи.</p>
+    <section id="taichi" class="py-20 px-6">
+        <div class="container mx-auto text-center">
+            <h3 data-key="tc-h3" class="text-3xl md:text-4xl font-bold mb-6 uppercase">ТАЙЦЗИЦЮАНЬ ЧЭНЬ</h3>
+            <p data-key="tc-p" class="text-gold italic mb-10 text-lg md:text-xl underline underline-offset-8">18, 34, 56 форм</p>
+            <div class="max-w-2xl mx-auto mb-10 text-gray-400 text-sm md:text-base">
+                <p data-key="tc-desc">Оздоровительные методики и профессиональная подготовка к соревнованиям.</p>
             </div>
-            <img src="taichi.png" alt="Tai Chi" class="mx-auto rounded-lg grayscale hover:grayscale-0 transition duration-500 max-w-xl w-full mb-10">
+            <div class="max-w-xl mx-auto rounded-2xl overflow-hidden border border-white/10">
+                <img src="taichi.png" alt="Tai Chi" class="w-full h-auto grayscale hover:grayscale-0 transition duration-700">
+            </div>
         </div>
     </section>
 
-    <section id="pricing" class="py-20 bg-gold text-black">
-        <div class="container mx-auto px-6 text-center">
-            <h3 data-key="price-h3" class="text-4xl font-bold mb-8 uppercase tracking-tighter">Обучение и расписание</h3>
+    <section id="pricing" class="py-20 bg-gold text-black px-6">
+        <div class="container mx-auto text-center">
+            <h3 data-key="price-h3" class="text-3xl md:text-4xl font-bold mb-8 uppercase tracking-tighter">Обучение и расписание</h3>
             <div class="max-w-4xl mx-auto bg-black text-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
-                <div class="p-12 md:w-1/2 flex flex-col justify-center">
-                    <div data-key="price-tag" class="text-sm uppercase tracking-widest text-gray-400 mb-2">Стоимость</div>
-                    <div class="text-5xl font-bold mb-4">20,000 <span class="text-xl font-light">₽/мес</span></div>
-                    <p data-key="price-desc" class="text-gray-400">Интенсивные тренировки в малых группах.</p>
+                <div class="p-10 md:w-1/2 flex flex-col justify-center border-b md:border-b-0 md:border-r border-white/10">
+                    <div data-key="price-tag" class="text-xs uppercase tracking-widest text-gray-500 mb-2">Стоимость</div>
+                    <div class="text-4xl md:text-5xl font-bold mb-4">20,000 <span class="text-lg font-light">₽/мес</span></div>
+                    <p data-key="price-desc" class="text-gray-400 text-sm italic">Группы до 6 человек.</p>
                 </div>
-                <div class="p-12 md:w-1/2 bg-zinc-900 flex flex-col justify-center border-l border-white/5">
-                    <div class="flex items-center space-x-4 mb-6">
+                <div class="p-10 md:w-1/2 bg-zinc-900 flex flex-col justify-center">
+                    <div class="flex items-center justify-center md:justify-start space-x-4 mb-8">
                         <i class="far fa-clock text-gold text-2xl"></i>
                         <div class="text-left">
-                            <h5 data-key="price-time" class="font-bold uppercase text-gold italic">Суббота и Воскресенье</h5>
-                            <p class="text-2xl">09:00 — 12:00</p>
+                            <h5 data-key="price-time" class="font-bold uppercase text-gold text-xs italic">Сб — Вс</h5>
+                            <p class="text-xl md:text-2xl">09:00 — 12:00</p>
                         </div>
                     </div>
-                    <div class="flex space-x-4">
-                        <a href="https://t.me/WuYuPeng" target="_blank" class="flex-1 bg-[#0088cc] text-white py-3 rounded-xl hover:opacity-80 transition"><i class="fab fa-telegram-plane mr-2"></i>Telegram</a>
-                        <button onclick="toggleWechat()" class="flex-1 bg-[#07c160] text-white py-3 rounded-xl hover:opacity-80 transition"><i class="fab fa-weixin mr-2"></i>WeChat</button>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="https://t.me/WuYuPeng" class="flex-1 bg-[#0088cc] py-3 rounded-lg text-sm font-bold uppercase"><i class="fab fa-telegram-plane mr-2"></i> TG</a>
+                        <button onclick="toggleWechat()" class="flex-1 bg-[#07c160] py-3 rounded-lg text-sm font-bold uppercase"><i class="fab fa-weixin mr-2"></i> WeChat</button>
                     </div>
                 </div>
             </div>
-            <a href="https://t.me/ARGlassesXR" target="_blank" data-key="price-btn" class="inline-block mt-12 px-10 py-4 bg-black text-white font-bold rounded-full hover:scale-105 transition transform uppercase">欢迎加入我的频道： t.me/ARGlassesXR</a>
         </div>
     </section>
 
-    <footer class="py-10 border-t border-white/10 text-center text-gray-500 text-sm">
-        <div class="mb-4 flex justify-center space-x-6">
-            <a href="https://t.me/WuYuPeng" target="_blank" class="text-2xl hover:text-gold transition"><i class="fab fa-telegram"></i></a>
-            <button onclick="toggleWechat()" class="text-2xl hover:text-gold transition"><i class="fab fa-weixin"></i></button>
-            <a href="#" class="text-2xl hover:text-gold transition"><i class="fab fa-instagram"></i></a>
+    <footer class="py-12 border-t border-white/10 text-center text-gray-600 text-[10px] md:text-xs uppercase tracking-widest px-6">
+        <p data-key="footer-copy" class="mb-4">&copy; 2026 У Юйпэн. ИТМО Магистр.</p>
+        <div class="flex justify-center space-x-6">
+            <a href="https://t.me/WuYuPeng" class="hover:text-gold transition">Telegram</a>
+            <a href="https://t.me/ARGlassesXR" class="hover:text-gold transition">Channel</a>
         </div>
-        <p data-key="footer-copy">&copy; 2026 У Юйпэн. ИТМО Магистр. Все права защищены.</p>
     </footer>
 
-    <div id="wechat-modal" class="fixed inset-0 z-[100] bg-black/90 items-center justify-center p-6" onclick="toggleWechat()">
-        <div class="bg-white p-4 rounded-2xl max-w-sm w-full relative" onclick="event.stopPropagation()">
-            <button class="absolute -top-10 right-0 text-white text-3xl" onclick="toggleWechat()">&times;</button>
-            <img src="wechat.jpg" alt="WeChat QR Code" class="w-full h-auto rounded-lg">
-            <p class="text-black text-center mt-4 font-bold">WeChat ID: WuYuPeng_Kungfu</p>
+    <div id="wechat-modal" class="fixed inset-0 z-[100] bg-black/95 items-center justify-center p-6" onclick="toggleWechat()">
+        <div class="bg-white p-4 rounded-2xl max-w-xs w-full relative" onclick="event.stopPropagation()">
+            <button class="absolute -top-12 right-0 text-white text-4xl" onclick="toggleWechat()">&times;</button>
+            <img src="wechat.jpg" alt="QR" class="w-full h-auto rounded-lg shadow-xl border border-gray-100">
+            <p class="text-black text-center mt-4 font-bold text-xs uppercase">ID: WuYuPeng_Kungfu</p>
         </div>
     </div>
 
     <script>
         const langData = {
             ru: {
-                "nav-about": "О мастере", "nav-wingchun": "Вин-чун", "nav-taichi": "Тайцзицюань", "nav-pricing": "Обучение",
+                "nav-about": "Мастер", "nav-wingchun": "Вин-чун", "nav-taichi": "Тайцзи", "nav-pricing": "Запись",
                 "hero-sub": "Традиционные боевые искусства", "hero-name": "У ЮЙПЭН", "hero-title": "Мастер Вин-чун и Тайцзи",
-                "hero-desc": "Сочетание интеллектуальной мощи Университета ИТМО и 10-летнего опыта традиционного кунг-фу.",
-                "hero-btn": "Начать обучение", "about-h3": "ИНТЕЛЛЕКТ И СИЛА", "about-stat": "Лет практики",
-                "about-p": "Я, У Юйпэн (2000 г.р.), представляю новое поколение мастеров. Окончив магистратуру ИТМО, я применяю аналитический подход к техникам.",
-                "about-feat1-t": "10 лет Вин-чун", "about-feat1-d": "Глубокое изучение системы прикладного боя.",
-                "about-feat2-t": "Тайцзи Чэньши", "about-feat2-d": "Обучение в Чэньцзягоу.",
-                "tag1": "Самооборона", "tag2": "Философия", "tag3": "Спорт", "tag4": "Здоровье",
-                "wc-h3": "ВИН-ЧУН (咏春拳)", "wc-p": "Искусство быстрого боя", "wc-f1-t": "Базовые формы", "wc-f2-t": "Оружие", "wc-f3-t": "Прикладной бой",
-                "tc-h3": "ТАЙЦЗИЦЮАНЬ СЕМЬИ ЧЭНЬ", "tc-p": "18, 34, 56 форм", "tc-desc": "Оздоровление и подготовка к соревнованиям.",
-                "price-h3": "Обучение и расписание", "price-tag": "Стоимость", "price-btn": "Добро пожаловать в мой канал: t.me/ARGlassesXR",
-                "price-time": "Суббота и Воскресенье", "footer-copy": "© 2026 У Юйпэн. Все права защищены."
+                "hero-desc": "Аналитический подход Университета ИТМО и 10 лет практики кунг-фу.",
+                "hero-btn": "Начать", "about-h3": "ИНТЕЛЛЕКТ И СИЛА", "about-stat": "Лет практики",
+                "about-p": "Я, У Юйпэн (2000 г.р.), представляю новое поколение мастеров. Окончив ИТМО, я применяю научный подход к техникам.",
+                "about-feat1-t": "10 лет Вин-чун", "about-feat2-t": "Тайцзи Чэньши",
+                "tag1": "Защита", "tag2": "Ум", "tag3": "Спорт", "tag4": "Ци",
+                "wc-h3": "ВИН-ЧУН", "wc-p": "Быстрый бой", "wc-f1-t": "Формы", "wc-f2-t": "Оружие", "wc-f3-t": "Прикладной",
+                "tc-h3": "ТАЙЦЗИЦЮАНЬ ЧЭНЬ", "tc-p": "18, 34, 56 форм", "tc-desc": "Здоровье и соревнования.",
+                "price-h3": "Обучение", "price-tag": "Цена", "price-time": "Сб — Вс", "footer-copy": "© 2026 У Юйпэн. Все права защищены."
             },
             en: {
-                "nav-about": "Master", "nav-wingchun": "Wing Chun", "nav-taichi": "Tai Chi", "nav-pricing": "Training",
+                "nav-about": "Master", "nav-wingchun": "Wing Chun", "nav-taichi": "Tai Chi", "nav-pricing": "Join",
                 "hero-sub": "Traditional Martial Arts", "hero-name": "WU YUPENG", "hero-title": "Wing Chun & Tai Chi Master",
-                "hero-desc": "Merging ITMO University's intellectual power with 10 years of traditional kung fu experience.",
-                "hero-btn": "Start Now", "about-h3": "INTELLECT & STRENGTH", "about-stat": "Years of Practice",
-                "about-p": "I am Wu Yupeng (born 2000), representing a new generation of martial arts masters. Applying analytical methods from ITMO to ancient arts.",
-                "about-feat1-t": "10 Years Wing Chun", "about-feat1-d": "Deep study of applied combat systems.",
-                "about-feat2-t": "Chen Tai Chi", "about-feat2-d": "Trained in Chenjiagou.",
-                "tag1": "Defense", "tag2": "Philosophy", "tag3": "Sports", "tag4": "Wellness",
-                "wc-h3": "WING CHUN", "wc-p": "Art of efficient combat", "wc-f1-t": "Core Forms", "wc-f2-t": "Weapons", "wc-f3-t": "Applications",
-                "tc-h3": "CHEN STYLE TAI CHI", "tc-p": "18, 34, 56 Forms", "tc-desc": "Focus on health preservation and Tai Chi competition.",
-                "price-h3": "Schedule & Pricing", "price-tag": "Tuition", "price-btn": "Welcome to my channel: t.me/ARGlassesXR",
-                "price-time": "Sat & Sun", "footer-copy": "© 2026 Wu Yupeng. All rights reserved."
+                "hero-desc": "Combining ITMO University logic with 10 years of kung fu experience.",
+                "hero-btn": "Start Now", "about-h3": "INTELLECT & POWER", "about-stat": "Years of Practice",
+                "about-p": "Wu Yupeng (b. 2000), representing a new generation of masters. ITMO graduate using analytical methods.",
+                "about-feat1-t": "10y Wing Chun", "about-feat2-t": "Chen Tai Chi",
+                "tag1": "Defense", "tag2": "Logic", "tag3": "Sports", "tag4": "Health",
+                "wc-h3": "WING CHUN", "wc-p": "Efficient combat", "wc-f1-t": "Forms", "wc-f2-t": "Weapons", "wc-f3-t": "Applied",
+                "tc-h3": "CHEN TAI CHI", "tc-p": "18, 34, 56 Forms", "tc-desc": "Health and Competition.",
+                "price-h3": "Training", "price-tag": "Price", "price-time": "Sat — Sun", "footer-copy": "© 2026 Wu Yupeng. All rights reserved."
             },
             zh: {
                 "nav-about": "关于教练", "nav-wingchun": "咏春拳", "nav-taichi": "陈氏太极", "nav-pricing": "教学课程",
                 "hero-sub": "传统中华武术", "hero-name": "武宇鹏", "hero-title": "咏春与太极爱好者",
-                "hero-desc": "融合 ITMO 大学的科技智慧与十载传统功夫经验。从防身技击到内在和谐之路。",
+                "hero-desc": "融合 ITMO 大学的科技智慧与十载传统功夫经验。",
                 "hero-btn": "开始学习", "about-h3": "聪明地学习", "about-stat": "习武年限",
-                "about-p": "武宇鹏 (2000年生)，新一代武术名家。ITMO大学硕士，尝试用科学分析的方法解析传统武学。",
-                "about-feat1-t": "多年咏春积淀", "about-feat1-d": "深耕实战应用与贴身搏击。",
-                "about-feat2-t": "陈氏太极传人", "about-feat2-d": "学于陈家沟太极发源地。",
-                "tag1": "实战防身", "tag2": "武学哲学", "tag3": "竞技体育", "tag4": "养生健康",
-                "wc-h3": "咏春拳", "wc-p": "高效实战搏击艺术", "wc-f1-t": "核心套路", "wc-f2-t": "传统器械", "wc-f3-t": "实战拆解",
-                "tc-h3": "陈家沟传统陈氏太极", "tc-p": "陈氏十八式、三十四式、五十六式", "tc-desc": "注重养生调理，专业太极竞赛教学。",
-                "price-h3": "教学与时间表", "price-tag": "课程学费", "price-btn": "欢迎加入我的频道： t.me/ARGlassesXR",
-                "price-time": "每周六、周日", "footer-copy": "© 2026 武宇鹏. 版权所有。"
+                "about-p": "武宇鹏 (2000年生)，ITMO大学硕士，尝试用科学分析的方法解析传统武学。",
+                "about-feat1-t": "咏春积淀", "about-feat2-t": "太极爱好者",
+                "tag1": "实战", "tag2": "哲学", "tag3": "竞技", "tag4": "健康",
+                "wc-h3": "咏春拳", "wc-p": "高效搏击", "wc-f1-t": "核心套路", "wc-f2-t": "传统器械", "wc-f3-t": "实战拆解",
+                "tc-h3": "陈家沟陈氏太极", "tc-p": "18式、34式、56式", "tc-desc": "注重养生调理与竞赛教学。",
+                "price-h3": "教学时间", "price-tag": "课程学费", "price-time": "每周六、周日", "footer-copy": "© 2026 武宇鹏. 版权所有。"
             }
         };
 
@@ -252,15 +274,16 @@
                 const key = el.getAttribute('data-key');
                 if (langData[lang][key]) el.innerText = langData[lang][key];
             });
-            // 切换状态样式
-            ['ru', 'en', 'zh'].forEach(l => {
-                document.getElementById('lang-' + l).classList.remove('lang-active');
-            });
-            document.getElementById('lang-' + lang).classList.add('lang-active');
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('lang-active'));
+            document.querySelectorAll('.lang-' + lang).forEach(btn => btn.classList.add('lang-active'));
             
-            // 如果是中文，可以增加字体优化类
             if(lang === 'zh') document.body.classList.add('chinese-font');
             else document.body.classList.remove('chinese-font');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden');
         }
 
         function toggleWechat() {
